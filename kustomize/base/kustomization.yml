@@ -4,7 +4,3 @@ resources:
 
 commonLabels:
   app: myflaskapp
-
-images:
-- name: lexops/flask-app
-  newTag: "latest"
