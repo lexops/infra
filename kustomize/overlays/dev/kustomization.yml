@@ -3,6 +3,10 @@ resources:
 
 namespace: dev
 
+replicas:
+- name: flask-app
+  count: 3
+
 images:
 - name: lexops/flask-app
   newTag: "29"
