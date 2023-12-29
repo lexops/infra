@@ -8,8 +8,9 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-    - run: echo "you are in $PWD"
-    - run: sed -i '$s/.*/  newTag: "10"/g' kustomize/overlays/dev/kustomization.yml
+    - name: Update Image 
+      run: |
+        sed -i '$s/.*/  newTag: "10"/g' kustomize/overlays/dev/kustomization.yml
         
         
         
