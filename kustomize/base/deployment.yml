@@ -6,6 +6,7 @@ spec:
   replicas: 1
   template:
     spec:
+    revisionHistoryLimit: 0
       containers:
       - name: flask-app
         image: lexops/flask-app:latest
