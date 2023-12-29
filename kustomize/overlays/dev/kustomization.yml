@@ -5,4 +5,4 @@ namespace: dev
 
 images:
 - name: lexops/flask-app
-  newTag: "$GITHUB_RUN_NUMBER"
+  newTag: 28
