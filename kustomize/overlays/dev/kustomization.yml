@@ -2,3 +2,7 @@ resources:
 - ../../base
 
 namespace: dev
+
+images:
+- name: lexops/flask-app
+  newTag: "9"
