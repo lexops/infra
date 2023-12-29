@@ -11,6 +11,5 @@ jobs:
     - name: Update Image 
       run: |
         sed -i '$s/.*/  newTag: "10"/g' kustomize/overlays/dev/kustomization.yml
-        git add .
-        git commit -m"Image updated"
-        git push
+    - name: Git Auto Commit
+      uses: stefanzweifel/git-auto-commit-action@v5.0.0
