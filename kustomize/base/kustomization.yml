@@ -4,3 +4,7 @@ resources:
 
 commonLabels:
   app: myflaskapp
+
+images:
+  - name: lexops/flask-app
+    newTag: 8
