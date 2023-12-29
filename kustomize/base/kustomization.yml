@@ -6,5 +6,5 @@ commonLabels:
   app: myflaskapp
 
 images:
-  - name: lexops/flask-app
-    newTag: 8
+- name: lexops/flask-app
+  newTag: 8
