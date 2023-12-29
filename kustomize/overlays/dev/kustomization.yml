@@ -5,4 +5,4 @@ namespace: dev
 
 images:
 - name: lexops/flask-app
-  newTag: 28
+  newTag: "29"
