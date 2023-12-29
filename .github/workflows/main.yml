@@ -11,6 +11,6 @@ jobs:
     - name: Update Image 
       run: |
         sed -i '$s/.*/  newTag: "10"/g' kustomize/overlays/dev/kustomization.yml
-        
-        
-        
+        git add .
+        git commit -m"Image updated"
+        git push
