@@ -8,6 +8,8 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.PAT }}
     - name: Update Image 
       run: |
         sed -i '$s/.*/  newTag: "10"/g' kustomize/overlays/dev/kustomization.yml
