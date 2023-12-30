@@ -3,6 +3,15 @@ kind: ApplicationSet
 metadata:
   name: flask-app
 spec:
+  generators:
+  - list:
+      elements:
+      - cluster: dev
+        url: https://kubernetes.default.svc
+      - cluster: hml
+        url: https://kubernetes.default.svc
+      - cluster: prod
+        url: https://kubernetes.default.svc
   template:
     metadata:
       name: 'flask-app-{{cluster}}'
@@ -21,12 +30,3 @@ spec:
           selfHeal: true
         syncOptions:
           - CreateNamespace=true
-  generators:
-  - list:
-      elements:
-      - cluster: dev
-        url: https://kubernetes.default.svc
-      - cluster: hml
-        url: https://kubernetes.default.svc
-      - cluster: prod
-        url: https://kubernetes.default.svc
