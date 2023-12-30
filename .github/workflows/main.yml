@@ -20,7 +20,7 @@ jobs:
       uses: mikefarah/yq@master
       with:
         cmd: |
-          yq -ie '.namespace = "$TENANT"' kustomize/overlays/$TENANT/kustomization.yml
+          yq -ie '.namespace = env(TENANT)' kustomize/overlays/$TENANT/kustomization.yml
     - name: Add new tenant dirs to ArgoCD ApplicationSet
       uses: mikefarah/yq@master
       with:
