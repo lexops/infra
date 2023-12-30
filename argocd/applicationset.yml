@@ -13,8 +13,8 @@ spec:
         path: kustomize/overlays/{{cluster}}
         targetRevision: HEAD
       destination:
-        server: {{url}}
-        namespace: {{cluster}}
+        server: '{{url}}'
+        namespace: '{{cluster}}''
       syncPolicy:
         automated:
           prune: true
