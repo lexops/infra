@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: flask-app
+spec:
+  template:
+    metadata:
+      name: 'flask-app-{{env}}'
+    spec:
+      project: default
+      source:
+        repoURL: 'https://github.com/lexops/infra'
+        path: kustomize/overlays/{{env}}
+        targetRevision: HEAD
+      destination:
+        server: 'https://kubernetes.default.svc'
+        namespace: {{env}}
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+  generators:
+  - list:
+      elements:
+      - env: dev
+      - env: hml
+      - env: prod
