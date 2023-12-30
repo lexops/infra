@@ -5,7 +5,7 @@ on:
       customer:
         required: true
 jobs:
-  Add-Costumer:
+  Add-Tenant:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -14,15 +14,13 @@ jobs:
       uses: chrisdickinson/setup-yq@latest
     - name: Checkout
       uses: actions/checkout@v4
-    - name: Create customer dirs
+    - name: Create tenant dirs
       run: |
-        export COSTUMER=${{ github.event.inputs.customer }}
-        mkdir -p kustomize/overlays/$CUSTOMER
-        pwd
-        echo "cp -r kustomize/overlays/dev kustomize/overlays/$CUSTOMER"
-    - name: Add customer dirs to ArgoCD
+        export TENANT=${{ github.event.inputs.customer }}
+        cp -r kustomize/overlays/dev kustomize/overlays/$TENANT
+    - name: Add tenant dirs to ArgoCD
       run: |
-        yq -ie ".namespace = $CUSTOMER" kustomize/overlays/$CUSTOMER/kustomization.yml
-        yq -ie ".spec.generators[0].list.elements += [{\"env\": \"$CUSTOMER\"}]" argocd/applicationset.yml
+        yq -ie ".namespace = $TENANT" kustomize/overlays/$TENANT/kustomization.yml
+        yq -ie ".spec.generators[0].list.elements += [{\"env\": \"$TENANT\"}]" argocd/applicationset.yml
     # - name: Git Auto Commit
     #   uses: stefanzweifel/git-auto-commit-action@v5.0.0
