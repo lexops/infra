@@ -21,8 +21,6 @@ jobs:
       with:
         cmd: |
           yq -ie '.namespace = "$TENANT"' kustomize/overlays/$TENANT/kustomization.yml \
-          && cat kustomize/overlays/$TENANT/kustomization.yml \
-          && yq -ie  '.spec.generators[0].list.elements += [{"env": env(TENANT)}]' argocd/applicationset.yml \ 
-          && cat argocd/applicationset.yml
+          && yq -ie  '.spec.generators[0].list.elements += [{"env": env(TENANT)}]' argocd/applicationset.yml  
     # - name: Git Auto Commit
     #   uses: stefanzweifel/git-auto-commit-action@v5.0.0
