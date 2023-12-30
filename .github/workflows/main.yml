@@ -2,8 +2,10 @@ name: cd
 on:
   workflow_dispatch:
     inputs:
-      customer:
+      tenant:
         required: true
+env:
+  TENANT: ${{ github.event.inputs.tenant }}
 jobs:
   Add-Tenant:
     runs-on: ubuntu-latest
@@ -13,12 +15,14 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
     - name: Create tenant dirs
-      run: cp -r kustomize/overlays/dev kustomize/overlays/${{ github.event.inputs.customer }}
+      run: cp -r kustomize/overlays/dev kustomize/overlays/$TENANT
     - name: Add tenant dirs to ArgoCD
       uses: mikefarah/yq@master
       with:
         cmd:
-          yq -ie '.namespace = "${{ github.event.inputs.customer }}"' kustomize/overlays/${{ github.event.inputs.customer }}/kustomization.yml && cat kustomize/overlays/${{ github.event.inputs.customer }}/kustomization.yml
-    # yq -ie  ".spec.generators[0].list.elements += [{\"env\": \"$TENANT\"}]" argocd/applicationset.yml
+          yq -ie '.namespace = "$TENANT"' kustomize/overlays/$TENANT/kustomization.yml \
+          && cat kustomize/overlays/$TENANT/kustomization.yml \
+          && yq -ie  '.spec.generators[0].list.elements += [{"env": "$TENANT"}]' argocd/applicationset.yml \
+          && cat argocd/applicationset.yml
     # - name: Git Auto Commit
     #   uses: stefanzweifel/git-auto-commit-action@v5.0.0
