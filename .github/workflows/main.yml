@@ -26,5 +26,8 @@ jobs:
       with:
         cmd: |
           yq -ie  '.spec.generators[0].list.elements += [{"env": env(TENANT)}]' argocd/applicationset.yml  
+    - run: |
+        cat namespace kustomize/overlays/$TENANT/kustomization.yml \
+        && tail argocd/applicationset.yml
     # - name: Git Auto Commit
     #   uses: stefanzweifel/git-auto-commit-action@v5.0.0
