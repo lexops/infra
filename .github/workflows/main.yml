@@ -17,10 +17,12 @@ jobs:
     - name: Create customer dirs
       run: |
         export COSTUMER=${{ github.event.inputs.customer }}
-        cp -r kustomize/overlays/dev kustomize/overlays/$CUSTOMER
+        mkdir -p kustomize/overlays/$CUSTOMER
+        pwd
+        echo "cp -r kustomize/overlays/dev kustomize/overlays/$CUSTOMER"
     - name: Add customer dirs to ArgoCD
       run: |
         yq -ie ".namespace = $CUSTOMER" kustomize/overlays/$CUSTOMER/kustomization.yml
         yq -ie ".spec.generators[0].list.elements += [{\"env\": \"$CUSTOMER\"}]" argocd/applicationset.yml
-    - name: Git Auto Commit
-      uses: stefanzweifel/git-auto-commit-action@v5.0.0
+    # - name: Git Auto Commit
+    #   uses: stefanzweifel/git-auto-commit-action@v5.0.0
