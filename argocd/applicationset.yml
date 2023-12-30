@@ -22,8 +22,9 @@ spec:
         syncOptions:
           - CreateNamespace=true
   generators:
-  - list:
-      elements:
-      - env: dev
-      - env: hml
-      - env: prod
+    - list:
+        elements:
+          - env: dev
+          - env: hml
+          - env: prod
+          - env: teste
