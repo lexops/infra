@@ -5,17 +5,21 @@ on:
       customer:
         required: true
 jobs:
-  Update-Image:
+  Add-Costumer:
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
+    - name: Install YQ
+      uses: chrisdickinson/setup-yq@latest
     - name: Checkout
       uses: actions/checkout@v4
-    - name: Add customer
+    - name: Create customer dirs
       run: |
         export COSTUMER=${{ github.event.inputs.customer }}
         cp -r kustomize/overlays/dev kustomize/overlays/$CUSTOMER
+    - name: Add customer dirs to ArgoCD
+      run: |
         yq -ie ".namespace = $CUSTOMER" kustomize/overlays/$CUSTOMER/kustomization.yml
         yq -ie ".spec.generators[0].list.elements += [{\"env\": \"$CUSTOMER\"}]" argocd/applicationset.yml
     - name: Git Auto Commit
