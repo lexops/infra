@@ -16,11 +16,15 @@ jobs:
       uses: actions/checkout@v4
     - name: Create tenant dirs
       run: cp -r kustomize/overlays/dev kustomize/overlays/$TENANT
-    - name: Add tenant dirs to ArgoCD
+    - name: Update  new tenant namespace
       uses: mikefarah/yq@master
       with:
         cmd: |
-          yq -ie '.namespace = "$TENANT"' kustomize/overlays/$TENANT/kustomization.yml \
-          && yq -ie  '.spec.generators[0].list.elements += [{"env": env(TENANT)}]' argocd/applicationset.yml  
+          yq -ie '.namespace = "$TENANT"' kustomize/overlays/$TENANT/kustomization.yml
+    - name: Add new tenant dirs to ArgoCD ApplicationSet
+      uses: mikefarah/yq@master
+      with:
+        cmd: |
+          yq -ie  '.spec.generators[0].list.elements += [{"env": env(TENANT)}]' argocd/applicationset.yml  
     # - name: Git Auto Commit
     #   uses: stefanzweifel/git-auto-commit-action@v5.0.0
