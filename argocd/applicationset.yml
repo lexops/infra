@@ -18,7 +18,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: 'https://github.com/lexops/infra'
+        repoURL: 'https://github.com/lexops/infra.git'
         path: kustomize/overlays/{{cluster}}
         targetRevision: HEAD
       destination:
