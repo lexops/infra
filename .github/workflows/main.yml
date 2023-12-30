@@ -12,10 +12,10 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-    - name: Update Image 
+    - name: Add customer
       run: |
         export COSTUMER=${{ github.event.inputs.customer }}
-        cp kustomize/dev kustomize/overlays/$CUSTOMER
+        cp kustomize/overlays/dev kustomize/overlays/$CUSTOMER
         yq -ie ".namespace = $CUSTOMER" kustomize/overlays/$CUSTOMER/kustomization.yml
         yq -ie ".spec.generators[0].list.elements += [{\"env\": \"$CUSTOMER\"}]" argocd/applicationset.yml
     - name: Git Auto Commit
