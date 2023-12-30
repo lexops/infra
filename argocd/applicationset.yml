@@ -5,16 +5,16 @@ metadata:
 spec:
   template:
     metadata:
-      name: 'flask-app-{{env}}'
+      name: 'flask-app-{{cluster}}'
     spec:
       project: default
       source:
         repoURL: 'https://github.com/lexops/infra'
-        path: kustomize/overlays/{{env}}
+        path: kustomize/overlays/{{cluster}}
         targetRevision: HEAD
       destination:
         server: 'https://kubernetes.default.svc'
-        namespace: {{env}}
+        namespace: {{cluster}}
       syncPolicy:
         automated:
           prune: true
@@ -24,6 +24,9 @@ spec:
   generators:
   - list:
       elements:
-      - env: dev
-      - env: hml
-      - env: prod
+      - cluster: dev
+        url: https://kubernetes.default.svc
+      - cluster: hml
+        url: https://kubernetes.default.svc
+      - cluster: prod
+        url: https://kubernetes.default.svc
