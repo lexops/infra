@@ -1,11 +1,11 @@
 resources:
 - ../../base
 
-namespace: dev
+namespace: prod
 
 replicas:
 - name: flask-app-deploy
-  count: 1
+  count: 3
 
 images:
 - name: lexops/flask-app
