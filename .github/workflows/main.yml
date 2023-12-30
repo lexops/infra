@@ -20,7 +20,7 @@ jobs:
         cp -r kustomize/overlays/dev kustomize/overlays/$TENANT
     - name: Add tenant dirs to ArgoCD
       run: |
-        yq -ie ".namespace = $TENANT" kustomize/overlays/$TENANT/kustomization.yml
-        yq -ie ".spec.generators[0].list.elements += [{\"env\": \"$TENANT\"}]" argocd/applicationset.yml
+        yq eval -i ".namespace = $TENANT" kustomize/overlays/$TENANT/kustomization.yml
+        yq eval -i  ".spec.generators[0].list.elements += [{\"env\": \"$TENANT\"}]" argocd/applicationset.yml
     # - name: Git Auto Commit
     #   uses: stefanzweifel/git-auto-commit-action@v5.0.0
