@@ -13,7 +13,7 @@ spec:
         path: kustomize/overlays/{{cluster}}
         targetRevision: HEAD
       destination:
-        server: {{cluster}}
+        server: {{url}}
         namespace: {{cluster}}
       syncPolicy:
         automated:
