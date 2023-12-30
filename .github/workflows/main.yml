@@ -13,14 +13,12 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
     - name: Create tenant dirs
-      run: |
-        export TENANT=${{ github.event.inputs.customer }}
-        cp -r kustomize/overlays/dev kustomize/overlays/$TENANT
+      run: cp -r kustomize/overlays/dev kustomize/overlays/${{ github.event.inputs.customer }}
     - name: Add tenant dirs to ArgoCD
       uses: mikefarah/yq@master
       with:
         cmd:
-          yq -ie ".namespace = $TENANT" kustomize/overlays/$TENANT/kustomization.yml && cat kustomize/overlays/$TENANT/kustomization.yml
+          yq -ie '.namespace = "${{ github.event.inputs.customer }}"' kustomize/overlays/${{ github.event.inputs.customer }}/kustomization.yml && cat kustomize/overlays/${{ github.event.inputs.customer }}/kustomization.yml
     # yq -ie  ".spec.generators[0].list.elements += [{\"env\": \"$TENANT\"}]" argocd/applicationset.yml
     # - name: Git Auto Commit
     #   uses: stefanzweifel/git-auto-commit-action@v5.0.0
