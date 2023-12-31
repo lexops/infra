@@ -15,7 +15,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
     - name: Remove tenant dirs
-      run: git rm kustomize/overlays/$TENANT
+      run: git rm -r kustomize/overlays/$TENANT
     - name: Remove new tenant dirs from ArgoCD ApplicationSet
       uses: mikefarah/yq@master
       with:
