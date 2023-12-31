@@ -27,5 +27,3 @@ spec:
           - env: dev
           - env: hml
           - env: prod
-          - env: teste
-          - env: teste
