@@ -25,16 +25,16 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     - name: HashiCorp - Setup Terraform
       uses: hashicorp/setup-terraform@v2.0.3
-    - name: Terraform Console
-      id: console
-      run: echo "var.access_key" | terraform console
-    - name: Terraform fmt
-      id: fmt
-      run: terraform fmt -check
-      continue-on-error: true
+    # - name: Terraform fmt
+    #   id: fmt
+    #   run: terraform fmt -check
+    #   continue-on-error: true
     - name: Terraform Init
       id: init
       run: terraform init
+    - name: Terraform Console
+      id: console
+      run: echo "var.access_key" | terraform console
     - name: Terraform Validate
       id: validate
       run: terraform validate -no-color
