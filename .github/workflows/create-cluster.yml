@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
 env:
   TF_VAR_access_key: ${{ secrets.TF_VAR_ACCESS_KEY }}
-  ARM_SUBSCRIPTION_ID: ${{ secrets.TF_VAR_SUBSCRIPTION_ID }}
-  ARM_TENANT_ID: ${{ secrets.TF_VAR_TENANT_ID}}
-  ARM_CLIENT_ID: ${{ secrets.TF_VAR_CLIENT_ID }}
-  ARM_CLIENT_SECRET: ${{ secrets.TF_VAR_CLIENT_SECRET }}
+  # ARM_SUBSCRIPTION_ID: ${{ secrets.TF_VAR_SUBSCRIPTION_ID }}
+  # ARM_TENANT_ID: ${{ secrets.TF_VAR_TENANT_ID}}
+  # ARM_CLIENT_ID: ${{ secrets.TF_VAR_CLIENT_ID }}
+  # ARM_CLIENT_SECRET: ${{ secrets.TF_VAR_CLIENT_SECRET }}
 jobs:
   Create-Cluster:
     runs-on: ubuntu-latest
