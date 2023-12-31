@@ -1,6 +1,6 @@
 resources:
   - ../../base
-namespace: $TENANT
+namespace: teste
 replicas:
   - name: flask-app-deploy
     count: 1
