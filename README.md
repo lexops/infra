@@ -12,6 +12,7 @@ metadata:
   name: applicationset-updater
   namespace: argocd
 spec:
+  project: default
   source:
     repoURL: 'https://github.com/lexops/infra.git'
     path: argocd
