@@ -23,6 +23,7 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - run: echo $TF_VAR_access_key
     - name: Terraform fmt
       id: fmt
       run: terraform fmt -check
