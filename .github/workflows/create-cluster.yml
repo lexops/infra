@@ -3,7 +3,7 @@ run-name: 🚀 Criando cluser
 on:
   workflow_dispatch:
 env:
-  TF_VAR_access_key: ${{ secrets.TF_VAR_ACCESS_KEY }}
+  # TF_VAR_access_key: ${{ secrets.TF_VAR_ACCESS_KEY }}
   ARM_SUBSCRIPTION_ID: ${{ secrets.TF_VAR_SUBSCRIPTION_ID }}
   ARM_TENANT_ID: ${{ secrets.TF_VAR_TENANT_ID}}
   ARM_CLIENT_ID: ${{ secrets.TF_VAR_CLIENT_ID }}
@@ -32,9 +32,6 @@ jobs:
     - name: Terraform Init
       id: init
       run: terraform init
-    - name: Terraform Console
-      id: console
-      run: echo "var.access_key" | terraform console
     - name: Terraform Validate
       id: validate
       run: terraform validate -no-color
