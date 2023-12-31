@@ -27,4 +27,3 @@ spec:
           - env: dev
           - env: hml
           - env: prod
-          - env: cliente-a
