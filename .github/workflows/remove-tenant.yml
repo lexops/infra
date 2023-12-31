@@ -1,4 +1,5 @@
 name: Remove Tenant
+run-name: 🔥 Removendo infra do cliente ${{ github.event.inputs.tenant }} 
 on:
   workflow_dispatch:
     inputs:
