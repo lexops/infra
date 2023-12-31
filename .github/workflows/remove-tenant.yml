@@ -1,0 +1,25 @@
+name: Remove Tenant
+on:
+  workflow_dispatch:
+    inputs:
+      tenant:
+        required: true
+env:
+  TENANT: ${{ github.event.inputs.tenant }}
+jobs:
+  Remove-Tenant:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Remove tenant dirs
+      run: git rm kustomize/overlays/$TENANT
+    - name: Remove new tenant dirs from ArgoCD ApplicationSet
+      uses: mikefarah/yq@master
+      with:
+        cmd: |
+          yq -ie 'del(.spec.generators[0].list.elements[] | select(.env == env(TENANT)))' argocd/applicationset.yml
+    - name: Git Auto Commit
+      uses: stefanzweifel/git-auto-commit-action@v5.0.0
