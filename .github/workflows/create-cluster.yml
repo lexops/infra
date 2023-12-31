@@ -3,7 +3,7 @@ run-name: 🚀 Criando cluser
 on:
   workflow_dispatch:
 env:
-  BLOB_ACCESS_KEY: ${{ secrets.TF_VAR_ACCESS_KEY }}
+  TF_VAR_access_key: ${{ secrets.TF_VAR_ACCESS_KEY }}
   ARM_SUBSCRIPTION_ID: ${{ secrets.TF_VAR_SUBSCRIPTION_ID }}
   ARM_TENANT_ID: ${{ secrets.TF_VAR_TENANT_ID}}
   ARM_CLIENT_ID: ${{ secrets.TF_VAR_CLIENT_ID }}
@@ -23,6 +23,7 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - run: export TF_VAR_access_key
     - name: HashiCorp - Setup Terraform
       uses: hashicorp/setup-terraform@v2.0.3
     # - name: Terraform fmt
