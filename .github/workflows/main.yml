@@ -1,4 +1,4 @@
-name: cd
+name: Add Tenant
 on:
   workflow_dispatch:
     inputs:
