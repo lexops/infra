@@ -1,0 +1,9 @@
+resources:
+  - ../../base
+namespace: cliente-c
+replicas:
+  - name: flask-app-deploy
+    count: 1
+images:
+  - name: lexops/flask-app
+    newTag: "29"
