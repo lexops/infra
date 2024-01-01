@@ -19,6 +19,9 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
+    - name: Replace Terraform Backend Config vars 
+      run: envsubst < backend.conf > backend.conf
+    - run: cat backend.conf
     - name: HashiCorp - Setup Terraform
       uses: hashicorp/setup-terraform@v2.0.3
     # - name: Terraform fmt
