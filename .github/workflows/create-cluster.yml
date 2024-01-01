@@ -2,8 +2,8 @@ name: Create Cluster
 run-name: 🚀 Subindo o cluster
 on:
   workflow_dispatch:
-# env:
-#   TENANT: ${{ github.event.inputs.tenant }}
+env:
+  TF_VAR_access_key: ${{ secrets.ARM_CLIENT_SECRET }}
 jobs:
   Add-Cluster:
     runs-on: ubuntu-latest
