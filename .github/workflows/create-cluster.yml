@@ -28,6 +28,7 @@ jobs:
     #   id: fmt
     #   run: terraform fmt -check
     #   continue-on-error: true
+    - run: rm -rf .terraform
     - name: Terraform Init
       id: init
       run: terraform init -backend-config=backend.conf
