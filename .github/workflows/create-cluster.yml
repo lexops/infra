@@ -1,0 +1,30 @@
+name: Add Cluster
+run-name: 🚀 Subindo o cluster
+on:
+  workflow_dispatch:
+env:
+  # TENANT: ${{ github.event.inputs.tenant }}
+jobs:
+  Add-Cluster:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/checkout@v3
+    - uses: hashicorp/setup-terraform@v3
+    # - name: Terraform fmt
+    #   id: fmt
+    #   run: terraform fmt -check
+    #   continue-on-error: true
+    - name: Terraform Init
+      id: init
+      run: terraform init
+    - name: Terraform Validate
+      id: validate
+      run: terraform validate -no-color
+    - name: Terraform Plan
+      id: plan
+      run: terraform plan -no-color
+      continue-on-error: true
+    # - name: Git Auto Commit
+    #   uses: stefanzweifel/git-auto-commit-action@v5.0.0
