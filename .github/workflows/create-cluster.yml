@@ -13,21 +13,26 @@ jobs:
       run:
         working-directory: terraform
     steps:
-    - uses: actions/checkout@v3
-    - uses: hashicorp/setup-terraform@v3
+    - name: Checkout
+    - uses: actions/checkout@v4
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    # - uses: hashicorp/setup-terraform@v3
     # - name: Terraform fmt
     #   id: fmt
     #   run: terraform fmt -check
     #   continue-on-error: true
-    - name: Terraform Init
-      id: init
-      run: terraform init
-    - name: Terraform Validate
-      id: validate
-      run: terraform validate -no-color
-    - name: Terraform Plan
-      id: plan
-      run: terraform plan -no-color
-      continue-on-error: true
+    # - name: Terraform Init
+    #   id: init
+    #   run: terraform init
+    # - name: Terraform Validate
+    #   id: validate
+    #   run: terraform validate -no-color
+    # - name: Terraform Plan
+    #   id: plan
+    #   run: terraform plan -no-color
+    #   continue-on-error: true
     # - name: Git Auto Commit
     #   uses: stefanzweifel/git-auto-commit-action@v5.0.0
