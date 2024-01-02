@@ -89,3 +89,14 @@ resource "helm_release" "nginx_ingress" {
     azurerm_kubernetes_cluster.lexops
   ]
 }
+
+
+data "kubernetes_service" "lexops" {
+  metadata {
+    name = "nginx-ingress-controller"
+  }
+}
+
+output "nginx_endpoint" {
+  value = data.kubernetes_service.example.status.0.load_balancer.0.ingress.0
+}
