@@ -47,6 +47,10 @@ resource "azurerm_kubernetes_cluster" "lexops" {
   tags = {
     Environment = "Dev"
   }
+
+  depends_on = [
+    azurerm_resource_group.lexops
+  ]
 }
 
 output "client_certificate" {
@@ -71,5 +75,8 @@ resource "helm_release" "nginx_ingress" {
 
   repository = "https://charts.bitnami.com/bitnami"
   chart      = "nginx-ingress-controller"
-  
+
+  depends_on = [
+    azurerm_kubernetes_cluster.lexops
+  ]
 }
