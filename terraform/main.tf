@@ -4,6 +4,10 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "~>3.0"
     }
+    helm = {
+      source = "hashicorp/helm"
+      version = "2.12.1"
+    }
   }
   backend "azurerm" {
       resource_group_name  = "tfstate"
@@ -54,4 +58,18 @@ output "kube_config" {
   value = azurerm_kubernetes_cluster.lexops.kube_config_raw
 
   sensitive = true
+}
+
+provider "helm" {
+  kubernetes {
+    config_path = azurerm_kubernetes_cluster.lexops.kube_config_raw
+  }
+}
+
+resource "helm_release" "nginx_ingress" {
+  name       = "nginx-ingress-controller"
+
+  repository = "https://charts.bitnami.com/bitnami"
+  chart      = "nginx-ingress-controller"
+  
 }
