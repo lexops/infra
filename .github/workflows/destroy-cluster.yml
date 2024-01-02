@@ -1,0 +1,42 @@
+name: Destroy Cluster
+run-name: 🔥 Destruindo o cluster
+on:
+  workflow_dispatch:
+env:
+  ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+  ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+  ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+  TF_VAR_access_key: ${{ secrets.ARM_CLIENT_SECRET }}
+jobs:
+  Destroy-Cluster:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    defaults:
+      run:
+        working-directory: terraform
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - uses: hashicorp/setup-terraform@v3
+    - name: Terraform fmt
+      id: fmt
+      run: terraform fmt -check
+      continue-on-error: true
+    - name: Terraform Init
+      id: init
+      run: terraform init
+    - name: Terraform Validate
+      id: validate
+      run: terraform validate -no-color
+    - name: Terraform Plan
+      id: plan
+      run: terraform plan -destroy -no-color
+      continue-on-error: true
+    - name: Terraform Destroy
+      id: destroy
+      run: terraform destroy -auto-approve
+      continue-on-error: true
+    # - name: Git Auto Commit
+    #   uses: stefanzweifel/git-auto-commit-action@v5.0.0
