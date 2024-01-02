@@ -65,9 +65,6 @@ output "kube_config" {
 }
 
 provider "helm" {
-  kubernetes {
-    config_path = azurerm_kubernetes_cluster.lexops.kube_config_raw
-  }
 }
 
 resource "helm_release" "nginx_ingress" {
