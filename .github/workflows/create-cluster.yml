@@ -34,5 +34,9 @@ jobs:
       id: plan
       run: terraform plan -no-color
       continue-on-error: true
+    - name: Terraform Apply
+      id: apply
+      run: terraform apply -auto-approve
+      continue-on-error: true
     # - name: Git Auto Commit
     #   uses: stefanzweifel/git-auto-commit-action@v5.0.0
