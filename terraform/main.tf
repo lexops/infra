@@ -91,12 +91,12 @@ resource "helm_release" "nginx_ingress" {
 }
 
 
-data "kubernetes_service" "lexops" {
-  metadata {
-    name = "nginx-ingress-controller"
-  }
-}
+# data "kubernetes_service" "lexops" {
+#   metadata {
+#     name = "nginx-ingress-controller"
+#   }
+# }
 
-output "nginx_endpoint" {
-  value = data.kubernetes_service.lexops.status.0.load_balancer.0.ingress.0
-}
+# output "nginx_endpoint" {
+#   value = data.kubernetes_service.lexops.status.0.load_balancer.0.ingress.0
+# }
