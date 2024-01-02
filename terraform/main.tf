@@ -64,8 +64,9 @@ output "kube_config" {
   sensitive = true
 }
 
-output "cluster_endpoint" {
-  value = azurerm_kubernetes_cluster.lexops.
+data "azurerm_kubernetes_cluster" "lexops" {
+  name                = azurerm_kubernetes_cluster.lexops.name
+  resource_group_name = azurerm_resource_group.lexops.name
 }
 
 provider "helm" {
