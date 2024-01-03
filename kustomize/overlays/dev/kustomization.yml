@@ -1,12 +1,9 @@
 resources:
-- ../../base
-
+  - ../../base
 namespace: dev
-
 replicas:
-- name: flask-app-deploy
-  count: 1
-
+  - name: flask-app-deploy
+    count: 1
 images:
-- name: lexops/flask-app
-  newTag: "29"
+  - name: lexops/flask-app
+    newTag: 31
