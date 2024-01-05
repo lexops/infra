@@ -6,4 +6,4 @@ replicas:
     count: 1
 images:
   - name: lexops/flask-app
-    newTag: "31"
+    newTag: '31'
