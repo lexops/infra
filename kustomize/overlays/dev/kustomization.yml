@@ -1,9 +1,11 @@
 resources:
-  - ../../base
+- ../../base
 namespace: dev
 replicas:
-  - name: flask-app-deploy
-    count: 1
+- count: 1
+  name: flask-app-deploy
 images:
-  - name: lexops/flask-app
-    newTag: '31'
+- name: lexops/flask-app
+  newTag: 0e907cbec6640e8bd17fda32eaf36dc585f127a3
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
