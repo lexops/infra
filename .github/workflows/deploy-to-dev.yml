@@ -1,20 +1,27 @@
 name: Deploy to Dev
 on:
   workflow_dispatch:
+  repository_dispatch:
+    types:
+      - webhook    
 jobs:
   deploy-to-dev:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    env:
+      PAYLOAD: ${{ github.event.client_payload }}
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-    - name: Setup Kustomize
-      uses: imranismail/setup-kustomize@v2.1.0-rc
-    - name: Update Image
-      working-directory: kustomize/overlays/dev
-      run: |
-        kustomize edit set image lexops/flask-app:${GITHUB_RUN_NUMBER}
-    - uses: stefanzweifel/git-auto-commit-action@v5
-      with:
-        commit_message: Set `lexops/flask-app` image tag to `${{ github.run_number }}`
+    - run: echo $PAYLOAD
+
+    # - name: Checkout
+    #   uses: actions/checkout@v4
+    # - name: Setup Kustomize
+    #   uses: imranismail/setup-kustomize@v2.1.0-rc
+    # - name: Update Image
+    #   working-directory: kustomize/overlays/dev
+    #   run: |
+    #     kustomize edit set image lexops/flask-app:${GITHUB_RUN_NUMBER}
+    # - uses: stefanzweifel/git-auto-commit-action@v5
+    #   with:
+    #     commit_message: Set `lexops/flask-app` image tag to `${{ github.run_number }}`
