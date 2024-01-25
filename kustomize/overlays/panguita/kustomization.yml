@@ -2,7 +2,7 @@ resources:
   - ../../base
 namespace: panguita
 replicas:
-  - count: 1
+  - count: 3
     name: flask-app-deploy
 images:
   - name: lexops/flask-app
