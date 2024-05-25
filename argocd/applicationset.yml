@@ -29,4 +29,3 @@ spec:
           - env: prod
           - env: cliente-a
           - env: cliente-c
-          - env: abc
