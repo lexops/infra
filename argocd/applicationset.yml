@@ -24,5 +24,4 @@ spec:
   generators:
     - list:
         elements:
-          - env: hml
           - env: prod
