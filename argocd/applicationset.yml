@@ -24,7 +24,6 @@ spec:
   generators:
     - list:
         elements:
-          - env: dev
           - env: hml
           - env: prod
           - env: cliente-a
