@@ -26,4 +26,3 @@ spec:
         elements:
           - env: hml
           - env: prod
-          - env: cliente-c
